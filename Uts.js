@@ -7,6 +7,8 @@ const {rgb}=require('pdf-lib')
 const{degrees}=require('pdf-lib');
 const { type } = require('os');
 
+const counter = 0;
+
 const Uts = () => {
     
     
@@ -59,16 +61,18 @@ async function modifypdf(barkodnum,productname,refcode,Quantity){
       color: rgb(0, 0, 0),
     })
    
-    var folder = './pdfler';
+    const folder = counter/100;
+    const folderName = './pdfler/'+folder;
 
     if (!fs.existsSync(folder)){
-        fs.mkdirSync(folder);
+        fs.mkdirSync(folder, { recursive: true });
     }
    
   
     const pdfBytes = await pdfDoc.save()
-    await fs.writeFileSync(`./${folder}/`+refcode+".pdf",pdfBytes);
+    await fs.writeFileSync(`./${folderName}/`+refcode+".pdf",pdfBytes);
   
+    counter++;
   }
 
 
